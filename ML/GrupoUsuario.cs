@@ -11,5 +11,6 @@ namespace ML
         public int IdGrupoUsuario { get; set; }
         public ML.Grupo Grupo { get; set; }
         public ML.Usuario Usuario { get; set; }
+        public List<object> Grupos { get; set; }
     }
 }

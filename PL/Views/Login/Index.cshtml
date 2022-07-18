@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 <head>
@@ -22,7 +21,7 @@
             <div class="h4 text-white">ThTec</div>
             <div class="fs-5 text-white text-grey">Bienvenido</div>
             <div class="text my-4 text-grey">
-                Somos una empresa con más de 10 años de experiencia, 
+                Somos una empresa con más de 10 años de experiencia,
                 reconocida por nuestros clientes como un Socio de Negocios.
             </div>
             <div class="d-flex align-items-center pt-3 mt-4">
@@ -32,28 +31,28 @@
         <div class="form-card">
             <div class="card">
                 <div class="card-form">
-                    <p class="text-center text-muted fs-08 mt-3">Inicia sesión con tu email y contraseña</p>
-                    <form method="post">
+                    <p class="text-center text-muted fs-08 mt-3">Inicia sesión con tu username y contraseña</p>
+                    <form method="post" name="UsuarioGetByUserName">
                         <!-- USERNAME INPUT -->
-                        <label for="UserName">Username</label>
-                        <input type="text" placeholder="Ingresa Username">
-                        <!-- PASSWORD INPUT -->
-                        <label for="Contraseña">Contraseña</label>
-                        <input type="password" placeholder="Ingresa Contraseña">
-                        <div>
+                        <div class="form-group">
+                            <label for="UserName">Username</label>
+                            <input type="text" name="userName" placeholder="Ingresa Username" id="iuserName" class="form-control">
+                            <!-- PASSWORD INPUT -->
+                            <label for="Contraseña">Contraseña</label>
+                            <input type="password" name="contrasenia" placeholder="Ingresa Contraseña" id="icontrasenia" class="form-control">
+                            <br />
+                            <button name="UsuarioGetByUserName" value="UsuarioGetByUserName" class=" btn btn-success" type="submit" onclick="return Login()">Entrar</button>
+                        </div>
+                    </form>
+                    <div class="d-flex align-items-center">
 
-                        </div>
-                        <input type="submit" value="Entrar">
-                        </form>
-                        <div class="d-flex align-items-center">
-
-                        </div>
-                        <div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mt-4 mb-0">
-                            <a class="btn btn-success" href="/Usuario/Form?">Registrate</a>
-                        </div>
-</div>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mt-4 mb-0 ">
+                        <a class="btn  btn-outline-secondary btn-lg " href="/Usuario/Form?">Registrate</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -76,4 +75,19 @@
         });
         VanillaTilt.init(document.querySelectorAll(".card"));
     });
+
+    function Login() {
+
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:25500/Login/UsuarioGetByUserName',
+            dataType: 'json',
+            data: JSON.stringify({ userName: $('#iuserName').val(), contrasenia: $('#icontrasenia').val() }),
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+                GetAll();
+                return false;
+            }
+        });
+    };
 </script>

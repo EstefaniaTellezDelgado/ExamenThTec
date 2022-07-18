@@ -1,99 +1,168 @@
-﻿@model ML.Result
+﻿@model ML.Usuario
 @{
-    ViewData["Title"] = "MateriaCargaMasiva";
+    ViewBag.Title = "GetAll";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <div class="container">
-    <h1>Usuario</h1>
-    <h5>Mensajes</h5>
-    <hr />
+    <div class="row">
+        <div class="=col-md-12">
+            <h2>Usuarios</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-responsive" id="tabla">
+                <thead class="thead-dark">
+                    <tr>
+                        <td>UserName</td>
+                        <td>Estatus</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    @foreach (ML.Usuario usuario in Model.Usuarios)
+                    {
+                        if (usuario.IdUsuario != 2)
+                        {
+                            <tr>
+                                <td>@usuario.UserName</td>
+                                <td>@usuario.Estatus.Nombre</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
 
     <div class="row">
         <div class="col-md-6">
-            <a><input type="submit" value="Excel" class="btn btn-success col-md-12" id="xlsx" /></a>
+            <a><input type="submit" value="Conectado" class="btn btn-success col-md-12" id="con" /></a>
         </div>
         <div class="col-md-6">
-            <a><input type="submit" value="TXT" class="btn btn-primary col-md-12" id="txt" /></a>
+            <a><input type="submit" value="Desconectado" class="btn btn-primary col-md-12" id="des" /></a>
         </div>
     </div>
-    @using (Html.BeginForm("MateriaCargaMasiva", "CargaMasiva", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="row g-3" id="fuImage" style="display:none;">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-earmark-text-fill" style="color: lightseagreen"></i></span>
-                    <input type='file' class="form-control" name="FileExcel" />
-                </div>
-            </div>
-            @if (!Model.Correct)
-            {
-                <div class="row g-3">
-                    <div class="col-md-1">
-                        <a><input type="submit" value="Procesar" class="btn btn-success" /></a>
-                        <br />
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div class="row g-3">
-                    <div class="col-md-1">
-                        <a><input type="submit" value="Insertar" class="btn btn-success" /></a>
-                        <br />
-                    </div>
-                </div>
-            }
-        </div>
-        <br />
-    }
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        @if (Model.Objects != null)
-        {
-            @if (Model.Objects.Count > 0)
-            {
-                <table class="table table-bordered table-responsive">
-                    <thead>
-                        <tr class="text-center">
-                            <td>IdRegistro</td>
-                            <td>Error</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (ML.ErrorExcel error in Model.Objects)
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-responsive" style="display:none" id="tabla1">
+                <thead class="thead-dark">
+                    <tr>
+                        <td class="hidden">IdUsuario</td>
+                        <td>Nombre</td>
+                        <td>Apellido Paterno</td>
+                        <td>Apellido Materno</td>
+                        <td>Correo</td>
+                        <td>Imagen</td>
+                        <td>UserName</td>
+                        <td>Estado</td>
+                        <td>Estatus</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Usuario usuario in Model.Usuarios)
+                    {
+                        if (usuario.Estado.IdEstado != 2)
                         {
-                            <tr class="text-center">
-                                <td>@error.IdRegistro</td>
-                                <td>@error.Mensaje</td>
+                            <tr>
+                                <td class="hidden">@usuario.IdUsuario</td>
+                                <td>@usuario.Nombre</td>
+                                <td>@usuario.ApellidoPaterno</td>
+                                <td>@usuario.ApellidoMaterno</td>
+                                <td>@usuario.Email</td>
+                                <td>
+                                    @if (usuario.Imagen.Length > 0)
+                                    {
+                                        <img src="data:image/*;base64, @usuario.Imagen" class="card-img-top">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Imagenes/sinimagen.jpeg" width="100px" height="100px" id="Img" />
+                                    }
+                                </td>
+                                <td>@usuario.UserName</td>
+                                <td>@usuario.Estado.Nombre</td>
+                                <td>@usuario.Estatus.Nombre</td>
                             </tr>
                         }
-                    </tbody>
-                </table>
-            }
-        }
-        else
-        {
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-        }
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-responsive" style="display:none" id="tabla2">
+                <thead class="thead-dark">
+                    <tr>
+                        <td class="hidden">IdUsuario</td>
+                        <td>Nombre</td>
+                        <td>Apellido Paterno</td>
+                        <td>Apellido Materno</td>
+                        <td>Correo</td>
+                        <td>Imagen</td>
+                        <td>UserName</td>
+                        <td>Estado</td>
+                        <td>Estatus</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Usuario usuario in Model.Usuarios)
+                    {
+                        if (usuario.Estado.IdEstado != 1)
+                        {
+                            <tr>
+                                <td class="hidden">@usuario.IdUsuario</td>
+                                <td>@usuario.Nombre</td>
+                                <td>@usuario.ApellidoPaterno</td>
+                                <td>@usuario.ApellidoMaterno</td>
+                                <td>@usuario.Email</td>
+                                <td>
+                                    @if (usuario.Imagen.Length > 0)
+                                    {
+                                        <img src="data:image/*;base64, @usuario.Imagen" class="card-img-top">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Imagenes/sinimagen.jpeg" width="100px" height="100px" id="Img" />
+                                    }
+                                </td>
+                                <td>@usuario.UserName</td>
+                                <td>@usuario.Estado.Nombre</td>
+                                <td>@usuario.Estatus.Nombre</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-6">
+                    <a><input type="submit" value="Grupos" class="btn btn-success col-md-12" id="con" href="/Grupo/GetAll" /></a>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
 
-@section Scripts
-{
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script type="text/javascript">
-
-
-
-
-        $('#xlsx').click(function () {
-            $('#fuImage').toggle('slow', function () {
-            });
+    $('#con').click(function () {
+        $('#tabla1').toggle('slow', function () {
         });
-    </script>
-}
+    });
+
+    $('#des').click(function () {
+        $('#tabla2').toggle('slow', function () {
+        });
+    });
+
+</script>

@@ -19,5 +19,7 @@ namespace ML
 
         public ML.Estado Estado { get; set; }
         public ML.Estatus Estatus { get; set; }
+        public string NombreCompleto { get; set; }
+        public List<object> Usuarios { get; set; }
     }
 }

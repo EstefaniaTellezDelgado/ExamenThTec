@@ -10,5 +10,6 @@ namespace ML
     {
         public int IdEstatus { get; set; }
         public string Nombre { get; set; }
+        public List<object> Status { get; set; }
     }
 }

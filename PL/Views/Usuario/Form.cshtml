@@ -1,47 +1,72 @@
 ﻿<html>
 <head>
-    <title>Formulario</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="~/Content/DataTables/css/StyleSheet2.css">
+    @*<link rel="stylesheet" href="css/normalize.css">*@
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
     <form name="Form" method="post">
-        <table>
-            <tr>
-                <td>Nombre</td>
-                <td><input name="txtNombre" type="text" value="" /></td>
-            </tr>
-            <tr>
-                <td>ApellidoPaterno</td>
-                <td><input name="txtApellidoPaterno" type="text" value="" /></td>
-            </tr>
-            <tr>
-                <td>ApellidoMaterno</td>
-                <td><input name="txtApellidoMaterno" type="text" value="" /></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input name="txtEmail" type="text" value="" /></td>
-            </tr>
-            <tr>
-                <td>Contraseña</td>
-                <td><input name="txtContraseña" type="text" value="" /></td>
-            </tr>
-            <tr>
-                <td>Imagen</td>
-                <td><input name="txtImagen"  type="file"  value="" /></td>
-            </tr>
-            <tr>
-                <td>IdEstado</td>
-                <td><input name="txtIdEstado" type="text" value="" /></td>
-            </tr>
-            <tr>
-                <td>IdEstatus</td>
-                <td><input name="txtIdEstatus" type="text" value="" /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="Guardar" class="submit"/></td>
-            </tr>
-        </table>
+
+        <h1>Registrate</h1>
+
+        <fieldset>
+            <legend><span class=""></span>Información</legend>
+            <h1></h1>
+            <label for="Nombre">Nombre:</label>
+            <input type="text" id="Nombre" name="Nombre">
+
+            <label for="ApellidoPaterno">Apellido Paterno:</label>
+            <input type="text" id="ApellidoPaterno" name="ApellidoPaterno">
+
+            <label for="ApellidoMaterno">Apellido Materno:</label>
+            <input type="text" id="ApellidoMaterno" name="ApellidoMaterno">
+
+            <label for="Email">Email:</label>
+            <input type="Email" id="Email" name="Email">
+
+            <label for="Contraseña">Contraseña:</label>
+            <input type="password" id="Contraseña" name="Contraseña">
+
+            <label for="UserName">UserName:</label>
+            <input type="text" id="UserName" name="UserName">
+
+            <label for="Imagen">Imagen:</label>
+            <input type="file" id="Imagen" name="Imagen">
+        </fieldset>
+
+        <button type="submit">Registrarse</button>
     </form>
+
 </body>
 </html>
+
+<script type="text/javascript">
+
+    function Login() {
+
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:25500/Usuario/Add',
+            dataType: 'json',
+            data: JSON.stringify({
+                Nombre: $('#Nombre').val(),
+                ApellidoPaterno: $('#ApellidoPaterno').val(),
+                ApellidoMaterno: $('#ApellidoMaterno').val(),
+                Email: $('#Email').val(),
+                Contraseña: $('#Contraseña').val(),
+                UserName: $('#UserName').val(),
+                Imagen: $('#Imagen').val()
+
+            }),
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+                GetAll();
+            }
+        });
+    };
+</script>

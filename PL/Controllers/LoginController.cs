@@ -14,16 +14,16 @@ namespace PL.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult UsuarioGetByUserName(string UserName, string Contraseña)
+        public ActionResult UsuarioGetByUserName(string userName, string contrasenia)
         {
             ML.Result result = new ML.Result();
-            result = BL.Login.GetByUserName(UserName);
+            result = BL.Login.GetByUserName(userName);
             if (result.Correct)
             {
                 ML.Usuario usuario = (ML.Usuario)result.Object;
-                if (usuario.UserName == UserName && usuario.Contraseña == Contraseña)
+                if (usuario.UserName == userName && usuario.Contraseña == contrasenia)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("GetAll", "Usuario");// Json(new { redirectToUrl = Url.Action("GetAll", "Usuario") });
                 }
                 else
                 {
@@ -35,5 +35,5 @@ namespace PL.Controllers
                 return View();
             }
         }
-    }
+     }
 }

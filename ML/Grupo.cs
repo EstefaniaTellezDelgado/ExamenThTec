@@ -10,5 +10,7 @@ namespace ML
     {
         public int IdGrupo { get; set; }
         public string Nombre { get; set; }
+        public List<object> Grupos { get; set; }
+        public ML.Mensaje Mensaje { get; set; }
     }
 }

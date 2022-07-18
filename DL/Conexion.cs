@@ -10,7 +10,7 @@ namespace DL
     {
             public static string GetConnection()
             {
-                return "Data Source =.; Initial Catalog = ExamenThTec; User ID = sa; Password = pass@word1";
+                return "Server=tcp:estefaniatellez.database.windows.net,1433;Initial Catalog=PruebaThTec;Persist Security Info=False;User ID=etellez;Password=pass@word1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             }
         }
 }
